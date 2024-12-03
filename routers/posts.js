@@ -12,8 +12,12 @@ router.get('/',(req,res)=>{
 
 //show
 router.get('/:id', (req,res)=>{
-    const postId = req.params.id;
-    res.json(`leggiamo solo un determinato dato ${postId}`);
+    const post = posts.find(p => p.id == req.params.id);
+    const postWithPreview = {
+        ...post,
+        imagePreview: `<img src="${post.image}" alt="${post.title}" style="max-width: 200px;"/>`
+    };
+    res.json(postWithPreview);
 });
 
 //store or create
